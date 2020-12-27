@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:taxiapp/screens/login_page.dart';
-
+import 'package:taxiapp/widgets/formFlatButton.dart';
+import 'package:taxiapp/widgets/formSubmitButton.dart';
 import '../models/brand_colors.dart';
+import '../widgets/formTextField.dart';
 
 class RegistrationPage extends StatelessWidget {
   @override
@@ -36,91 +37,43 @@ class RegistrationPage extends StatelessWidget {
                   padding: const EdgeInsets.all(35.0),
                   child: Column(
                     children: <Widget>[
-                      TextField(
-                        keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
-                          labelText: 'Full Name',
-                          alignLabelWithHint: true,
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(fontSize: 10),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        label: 'Full Name',
+                        kType: TextInputType.name,
+                        textController: null,
                       ),
-                      TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email Address',
-                          alignLabelWithHint: true,
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(fontSize: 10),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        label: 'Email Adddress',
+                        kType: TextInputType.emailAddress,
+                        textController: null,
                       ),
-                      TextField(
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          labelText: 'Phone Number',
-                          alignLabelWithHint: true,
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(fontSize: 10),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        label: 'Phone Number',
+                        kType: TextInputType.phone,
+                        textController: null,
                       ),
-                      TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          alignLabelWithHint: true,
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(fontSize: 20),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        value: true,
+                        label: 'Password',
+                        textController: null,
                       ),
-                      TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: 'Confirm Password',
-                          alignLabelWithHint: true,
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(fontSize: 20),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        value: true,
+                        label: 'Password',
+                        textController: null,
                       ),
                       SizedBox(height: 40),
                       Container(
                         height: 50,
                         width: 300,
-                        child: RaisedButton(
-                          onPressed: () {},
-                          onLongPress: () {
-                            return false;
-                          },
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                                fontSize: 25, fontFamily: 'Brand-Bold'),
-                          ),
+                        child: FormSubmitButton(
+                          label: 'REGISTER',
                           color: BrandColors.colorGreen,
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
+                          onPressFunction: () {},
                         ),
                       ),
                       Container(
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, LoginPage.id, (route) => false);
-                          },
-                          onLongPress: () {
-                            return false;
-                          },
-                          child: Text(
-                            'Algrady have a Account? Login Here!',
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
+                        child: FormFlatButton(label: 'Algrady have a Account? Login Here!', routeName: '/loginPage'),
                         padding: EdgeInsets.only(
                           top: 20,
                         ),

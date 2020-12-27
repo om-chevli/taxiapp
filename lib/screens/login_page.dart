@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:taxiapp/screens/registration_page.dart';
-
 import '../models/brand_colors.dart';
+import '../widgets/formTextField.dart';
+import '../widgets/formSubmitButton.dart';
+import '../widgets/formFlatButton.dart';
 
 class LoginPage extends StatelessWidget {
   static const String id = 'login';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,66 +42,36 @@ class LoginPage extends StatelessWidget {
                       SizedBox(
                         height: 8.0,
                       ),
-                      TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email Address',
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(
-                            fontSize: 10,
-                          ),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        value: false,
+                        label: 'Email Address',
+                        kType: TextInputType.emailAddress,
+                        textController: null,
                       ),
                       SizedBox(height: 20),
-                      TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          labelStyle: TextStyle(fontSize: 14),
-                          hintStyle: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        style: TextStyle(fontSize: 14),
+                      FormTextField(
+                        value: true,
+                        label: 'Password',
+                        kType: null,
+                        textController: null,
                       ),
                       SizedBox(height: 40),
                       Container(
                         height: 50,
                         width: 300,
-                        child: RaisedButton(
-                          onPressed: () {},
-                          onLongPress: () {
-                            return false;
-                          },
-                          child: Text(
-                            'Log In',
-                            style: TextStyle(
-                                fontSize: 25, fontFamily: 'Brand-Bold'),
-                          ),
+                        child: FormSubmitButton(
+                          label: 'LOGIN',
                           color: BrandColors.colorGreen,
-                          textColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
+                          onPressFunction: () {},
                         ),
                       ),
                       Container(
-                        child: FlatButton(
-                          onPressed: () {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, '/', (route) => false);
-                          },
-                          onLongPress: () {
-                            return false;
-                          },
-                          child: Text(
-                            "New Here? Create a Rider's account.",
-                            style: TextStyle(fontSize: 15),
-                          ),
-                        ),
                         padding: EdgeInsets.only(
                           top: 20,
+                        ),
+                        child: FormFlatButton(
+                          label: 'New Here? Create a Rider\'s Account',
+                          routeName: '/',
                         ),
                       ),
                     ],
