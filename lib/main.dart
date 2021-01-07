@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:taxiapp/screens/home_page.dart';
-import 'package:taxiapp/screens/login_page.dart';
-import 'package:taxiapp/screens/registration_page.dart';
+import './screens/home_page.dart';
+import './screens/login_page.dart';
+import './screens/registration_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

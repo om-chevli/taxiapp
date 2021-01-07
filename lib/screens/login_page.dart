@@ -43,7 +43,6 @@ class LoginPage extends StatelessWidget {
                         height: 8.0,
                       ),
                       FormTextField(
-                        value: false,
                         label: 'Email Address',
                         kType: TextInputType.emailAddress,
                         textController: null,
@@ -52,7 +51,6 @@ class LoginPage extends StatelessWidget {
                       FormTextField(
                         value: true,
                         label: 'Password',
-                        kType: null,
                         textController: null,
                       ),
                       SizedBox(height: 40),

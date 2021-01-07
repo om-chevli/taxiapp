@@ -1,14 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:taxiapp/widgets/formFlatButton.dart';
-import 'package:taxiapp/widgets/formSubmitButton.dart';
 import '../models/brand_colors.dart';
+import '../widgets/formFlatButton.dart';
+import '../widgets/formSubmitButton.dart';
 import '../widgets/formTextField.dart';
 
-class RegistrationPage extends StatelessWidget {
+
+class RegistrationPage extends StatefulWidget {
+  @override
+  _RegistrationPageState createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
+  final _form = GlobalKey<FormState>();
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final createPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    createPasswordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _saveForm() {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
@@ -34,51 +64,100 @@ class RegistrationPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(35.0),
-                  child: Column(
-                    children: <Widget>[
-                      FormTextField(
-                        label: 'Full Name',
-                        kType: TextInputType.name,
-                        textController: null,
-                      ),
-                      FormTextField(
-                        label: 'Email Adddress',
-                        kType: TextInputType.emailAddress,
-                        textController: null,
-                      ),
-                      FormTextField(
-                        label: 'Phone Number',
-                        kType: TextInputType.phone,
-                        textController: null,
-                      ),
-                      FormTextField(
-                        value: true,
-                        label: 'Password',
-                        textController: null,
-                      ),
-                      FormTextField(
-                        value: true,
-                        label: 'Password',
-                        textController: null,
-                      ),
-                      SizedBox(height: 40),
-                      Container(
-                        height: 50,
-                        width: 300,
-                        child: FormSubmitButton(
-                          label: 'REGISTER',
-                          color: BrandColors.colorGreen,
-                          onPressFunction: () {},
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2, horizontal: 35),
+                  child: Form(
+                    key: _form,
+                    child: Column(
+                      children: <Widget>[
+                        FormTextField(
+                          label: 'Full Name',
+                          kType: TextInputType.name,
+                          textController: nameController,
+                          validate: (text) {
+                            if (text.isEmpty) {
+                              return 'Please Enter your Full Name!';
+                            } else if (!(text.length > 5) && text.isNotEmpty) {
+                              return "Enter valid name of more then 5 characters!";
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      Container(
-                        child: FormFlatButton(label: 'Algrady have a Account? Login Here!', routeName: '/loginPage'),
-                        padding: EdgeInsets.only(
-                          top: 20,
+                        FormTextField(
+                          label: 'Email Adddress',
+                          kType: TextInputType.emailAddress,
+                          textController: emailController,
+                          validate: (text) {
+                            if (text.isEmpty) {
+                              return 'Please Enter your Email!';
+                            } else if (!(text.contains('@')) && text.isNotEmpty) {
+                              return "Enter a valid email address!";
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                    ],
+                        FormTextField(
+                          label: 'Phone Number',
+                          kType: TextInputType.phone,
+                          textController: phoneController,
+                          validate: (text) {
+                            if (text.isEmpty) {
+                              return 'Please Enter your Number!';
+                            } else if (!(text.length == 10) && text.isNotEmpty) {
+                              return "Phone number should be of 10 digits!";
+                            }
+                            return null;
+                          },
+                        ),
+                        FormTextField(
+                          value: true,
+                          label: 'Create Password',
+                          textController: createPasswordController,
+                          validate: (text) {
+                            if (text.isEmpty) {
+                              return 'Please Create a password!';
+                            } else if ((text.length < 8) && text.isNotEmpty) {
+                              return "Password should be of 8 digits!";
+                            }
+                            return null;
+                          },
+                        ),
+                        FormTextField(
+                          value: true,
+                          label: 'Confirm Password',
+                          textController: confirmPasswordController,
+                          validate: (text) {
+                            if (text.isEmpty) {
+                              return 'Please confirm your password!';
+                            } else if (text != createPasswordController.text &&
+                                text.isNotEmpty) {
+                              return "Password didn't matched!";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(height: 40),
+                        Container(
+                          height: 50,
+                          width: 300,
+                          child: FormSubmitButton(
+                            label: 'REGISTER',
+                            color: BrandColors.colorGreen,
+                            onPressFunction: () {
+                              _saveForm();
+                            },
+                          ),
+                        ),
+                        Container(
+                          child: FormFlatButton(
+                              label: 'Algrady have a Account? Login Here!',
+                              routeName: '/loginPage'),
+                          padding: EdgeInsets.only(
+                            top: 20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
